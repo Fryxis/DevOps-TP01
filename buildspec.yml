@@ -4,27 +4,11 @@ phases:
   install:
     commands:
       - echo "Starting the install phase"
-      - yum update -y
-      - yum install -y yum-utils
-      - amazon-linux-extras enable php8.2  # Active le dépôt pour PHP 8.2
-      - yum clean metadata
-      - yum install -y \
-          php-cli \
-          php-mbstring \
-          php-xml \
-          php-zip \
-          php-curl \
-          php-mysqlnd \
-          php-gd \
-          unzip \
-          git \
-          curl
       - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
   pre_build:
     commands:
       - echo "Starting the pre-build phase"
-      - docker --version  # Vérifie la version de Docker
       - composer install --no-interaction --prefer-dist --optimize-autoloader
 
   build:
