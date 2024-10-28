@@ -2,8 +2,6 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      docker: 19
     commands:
       - echo "Starting the install phase"
       - apt-get update && apt-get install -y software-properties-common
@@ -24,19 +22,18 @@ phases:
   pre_build:
     commands:
       - echo "Starting the pre-build phase"
+      - docker --version  # Vérifie la version de Docker
       - composer install --no-interaction --prefer-dist --optimize-autoloader
 
   build:
     commands:
       - echo "Starting the build phase"
-      - echo "Building the application"
       - php artisan config:cache
       - php artisan route:cache
 
   post_build:
     commands:
       - echo "Starting the post-build phase"
-      - echo "Packaging application for Elastic Beanstalk deployment"
       - zip -r deploy.zip .
       - echo "Creating new application version in Elastic Beanstalk"
       - aws elasticbeanstalk create-application-version --application-name Applications-Lenny --version-label build-v1 --source-bundle S3Bucket=$CODEBUILD_S3_BUCKET,S3Key=$CODEBUILD_BUILD_ID/deploy.zip
