@@ -6,14 +6,9 @@ phases:
       - echo "Starting the install phase"
       - yum update -y
       - yum install -y \
-          amazon-linux-extras \
           curl \
           git \
-          unzip
-      - echo "Enabling PHP 8.2 from Amazon Linux Extras"
-      - amazon-linux-extras enable php8.2
-      - yum clean metadata
-      - yum install -y \
+          unzip \
           php-cli \
           php-mbstring \
           php-xml \
