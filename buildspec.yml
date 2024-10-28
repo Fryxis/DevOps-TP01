@@ -14,13 +14,12 @@ phases:
       - export DB_DATABASE=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_DATABASE)
       - export DB_USERNAME=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_USERNAME)
       - export DB_PASSWORD=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_PASSWORD)
-      - echo "DB_HOST: $DB_HOST"
-      - echo "DB_PORT: $DB_PORT"
-      - echo "DB_DATABASE: $DB_DATABASE"
-      - echo "DB_USERNAME: $DB_USERNAME"
+      - echo $DB_HOST
+      - echo $DB_PORT
+      - echo $DB_DATABASE
+      - echo $DB_USERNAME
       - echo "Starting the pre-build phase"
       - composer install --no-interaction --prefer-dist --optimize-autoloader
-
   build:
     commands:
       - echo "Starting the build phase"
