@@ -4,17 +4,16 @@ phases:
   install:
     commands:
       - echo "Starting the install phase"
-      - apt-get update && apt-get install -y software-properties-common
-      - add-apt-repository ppa:ondrej/php
-      - apt-get update && apt-get install -y \
-          curl \
-          php8.2-cli \
-          php8.2-mbstring \
-          php8.2-xml \
-          php8.2-zip \
-          php8.2-curl \
-          php8.2-mysql \
-          php8.2-gd \
+      - yum update -y
+      - yum install -y yum-utils
+      - yum install -y curl \
+          php-cli \
+          php-mbstring \
+          php-xml \
+          php-zip \
+          php-curl \
+          php-mysqlnd \
+          php-gd \
           unzip \
           git
       - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
