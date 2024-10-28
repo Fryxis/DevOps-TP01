@@ -4,8 +4,25 @@ phases:
   install:
     commands:
       - echo "Starting the install phase"
+      - yum update -y
+      - yum install -y \
+          amazon-linux-extras \
+          curl \
+          git \
+          unzip
+      - echo "Enabling PHP 8.2 from Amazon Linux Extras"
+      - amazon-linux-extras enable php8.2
+      - yum clean metadata
+      - yum install -y \
+          php-cli \
+          php-mbstring \
+          php-xml \
+          php-zip \
+          php-curl \
+          php-mysqlnd \
+          php-gd
+      - echo "Dependencies installed"
       - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-      - yum install -y mysql-client
 
   pre_build:
     commands:
