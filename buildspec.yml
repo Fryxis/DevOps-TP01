@@ -38,10 +38,8 @@ phases:
       - echo "Starting the post-build phase"
       - echo "Packaging application for Elastic Beanstalk deployment"
       - zip -r deploy.zip .
-      - echo "Copying the application package to S3"
-      - aws s3 cp deploy.zip s3://my-s3-bucket/deploy.zip
       - echo "Creating new application version in Elastic Beanstalk"
-      - aws elasticbeanstalk create-application-version --application-name Applications-Lenny --version-label build-v1 --source-bundle S3Bucket=my-s3-bucket,S3Key=deploy.zip
+      - aws elasticbeanstalk create-application-version --application-name Applications-Lenny --version-label build-v1 --source-bundle S3Bucket=$CODEBUILD_S3_BUCKET,S3Key=$CODEBUILD_BUILD_ID/deploy.zip
       - aws elasticbeanstalk update-environment --environment-name Applications-Lenny-env --version-label build-v1
 
 artifacts:
