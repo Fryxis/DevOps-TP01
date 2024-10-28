@@ -5,17 +5,16 @@ phases:
     commands:
       - echo "Starting the install phase"
       - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+      - yum install -y mysql
 
   pre_build:
     commands:
       - echo "Fetching secrets from Secrets Manager"
-      # Remplace 'Secret_Mysql_lenny' par le nom exact de ton secret dans Secrets Manager
       - export DB_HOST=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_HOST)
       - export DB_PORT=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_PORT)
       - export DB_DATABASE=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_DATABASE)
       - export DB_USERNAME=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_USERNAME)
       - export DB_PASSWORD=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_PASSWORD)
-      - echo "Starting the pre-build phase"
       - echo "Starting the pre-build phase"
       - composer install --no-interaction --prefer-dist --optimize-autoloader
 
