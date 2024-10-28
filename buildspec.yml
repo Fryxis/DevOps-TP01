@@ -5,7 +5,7 @@ phases:
     commands:
       - echo "Starting the install phase"
       - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-      - yum install -y mysql
+      - yum install -y mariadb
 
   pre_build:
     commands:
