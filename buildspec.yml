@@ -14,8 +14,10 @@ phases:
   build:
     commands:
       - echo "Starting the build phase"
-      - php artisan config:cache
-      - php artisan route:cache
+      - php artisan cache:clear 
+      #- php artisan config:cache
+      #- php artisan route:cache
+      - php artisan migrate --force
 
   post_build:
     commands:
