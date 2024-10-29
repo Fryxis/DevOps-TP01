@@ -40,7 +40,7 @@ phases:
       - echo "Lancement de la phase de build"
       - npm run production
       - php artisan key:generate
-      - php artisan storage:link
+      #- php artisan storage:link
       - php artisan cache:clear
       - php artisan view:clear
       - php artisan optimize:clear
