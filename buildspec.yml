@@ -2,12 +2,42 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      php: 8.2
     commands:
       - echo "Lancement de la phase d'installation"
+      - yum update -y
+      - yum install -y php-pgsql
+      - yum install -y php-bcmath
+      - yum install -y php-ctype
+      - yum install -y php-fileinfo
+      - yum install -y php-mbstring
+      - yum install -y php-mysql
+      - yum install -y php-tokenizer
+      - yum install -y php-xml
+      - yum install -y php-json
+      - yum install -y php-pear
+      - yum install -y php-dev
+      - yum install -y php-imagemagick
+      - yum install -y libmagickwand-dev
+      - pecl install imagick
       - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
   pre_build:
     commands:
       - echo "Lancement de la phase de pre-build"	
+      #- mkdir -p storage/framework/sessions
+      #- mkdir -p storage/framework/views
+      #- mkdir -p storage/framework/cache
+      #- mkdir -p storage/logs
+      #- chmod -R 777 storage 
+      #- chmod -R 777 storage/framework
+      #- chmod -R 777 storage/framework/sessions
+      #- chmod -R 777 storage/framework/views
+      #- chmod -R 777 storage/framework/cache
+      #- chmod -R 777 storage/logs
+      #- chmod -R 777 ressources/lang
+      #- chmod -R 777 bootstrap/cache
+      #- chown -R root:root storage
       - echo "Récupération des variables dans secrets manager"
       - export DB_HOST=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_HOST)
       - export DB_PORT=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_PORT)
@@ -15,18 +45,28 @@ phases:
       - export DB_USERNAME=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_USERNAME)
       - export DB_PASSWORD=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_PASSWORD)
       - composer install --no-interaction --prefer-dist --optimize-autoloader
+      - npm install
+      - mv .env.prod .env
   build:
+    on-failure: ABORT
     commands:
       - echo "Lancement de la phase de build"
-      - php artisan cache:clear 
-      - echo "Running migrations"
+      - npm run production
+      - php artisan key:generate
+      - php artisan storage:link
+      - php artisan cache:clear
+      - php artisan view:clear
+      - php artisan optimize:clear
       - php artisan migrate --force
-      - rm -f public/storage && php artisan storage:link
   post_build:
     commands:
       - echo "Lance de la phase de post-build"
+      - php artisan test
       - zip -r deploy.zip .
 artifacts:
   files:
     - deploy.zip
   discard-paths: yes
+proxy:
+  upload-artifacts: no
+  logs: no
