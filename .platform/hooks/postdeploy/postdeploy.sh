@@ -28,3 +28,5 @@ chmod -R 777 /var/www/html/storage/logs
 chmod -R 777 /var/www/html/ressources/lang/
 chmod -R 777 /var/www/html/bootstrap/cache/
 chown -R root:root /var/www/html/storage
+cd /var/www/html/
+php artisan /var/www/html/storage:link

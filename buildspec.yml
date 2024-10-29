@@ -26,19 +26,6 @@ phases:
   pre_build:
     commands:
       - echo "Lancement de la phase de pre-build"	
-      #- mkdir -p storage/framework/sessions
-      #- mkdir -p storage/framework/views
-      #- mkdir -p storage/framework/cache
-      #- mkdir -p storage/logs
-      #- chmod -R 777 storage 
-      #- chmod -R 777 storage/framework/
-      #- chmod -R 777 storage/framework/sessions/
-      #- chmod -R 777 storage/framework/views/
-      #- chmod -R 777 storage/framework/cache/
-      #- chmod -R 777 storage/logs/
-      #- chmod -R 777 ressources/lang/
-      #- chmod -R 777 bootstrap/cache/
-      #- chown -R root:root storage
       - echo "Récupération des variables dans secrets manager"
       - export CACHE_DRIVER=file
       - export FILESYSTEM_DRIVER=local
