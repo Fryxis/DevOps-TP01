@@ -40,6 +40,8 @@ phases:
       #- chmod -R 777 bootstrap/cache
       #- chown -R root:root storage
       - echo "Récupération des variables dans secrets manager"
+      - export CACHE_DRIVER=file
+      - export FILESYSTEM_DRIVER=local
       - export DB_HOST=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_HOST)
       - export DB_PORT=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_PORT)
       - export DB_DATABASE=$(aws secretsmanager get-secret-value --secret-id Secret_Mysql_lenny --query SecretString --output text | jq -r .DB_DATABASE)
@@ -63,9 +65,11 @@ phases:
     commands:
       - echo "Lance de la phase de post-build"
       - php artisan test
+      - chmod +x .platform/hooks/postdeploy/postdeploy.sh
 artifacts:
   files:
     - '**/*'
+    - '.platform/**/*'
   name: $(date +%Y-%m-%d_%H-%M-%S).zip
 proxy:
   upload-artifacts: no
