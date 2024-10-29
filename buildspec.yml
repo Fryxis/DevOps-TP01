@@ -31,13 +31,13 @@ phases:
       #- mkdir -p storage/framework/cache
       #- mkdir -p storage/logs
       #- chmod -R 777 storage 
-      #- chmod -R 777 storage/framework
-      #- chmod -R 777 storage/framework/sessions
-      #- chmod -R 777 storage/framework/views
-      #- chmod -R 777 storage/framework/cache
-      #- chmod -R 777 storage/logs
-      #- chmod -R 777 ressources/lang
-      #- chmod -R 777 bootstrap/cache
+      #- chmod -R 777 storage/framework/
+      #- chmod -R 777 storage/framework/sessions/
+      #- chmod -R 777 storage/framework/views/
+      #- chmod -R 777 storage/framework/cache/
+      #- chmod -R 777 storage/logs/
+      #- chmod -R 777 ressources/lang/
+      #- chmod -R 777 bootstrap/cache/
       #- chown -R root:root storage
       - echo "Récupération des variables dans secrets manager"
       - export CACHE_DRIVER=file
