@@ -63,11 +63,10 @@ phases:
     commands:
       - echo "Lance de la phase de post-build"
       - php artisan test
-      - zip -r deploy.zip .
 artifacts:
   files:
-    - deploy.zip
-  discard-paths: yes
+    - '**/*'
+  name: $(date +%Y-%m-%d_%H-%M-%S).zip
 proxy:
   upload-artifacts: no
   logs: no
