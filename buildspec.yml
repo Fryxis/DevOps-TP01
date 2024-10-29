@@ -7,6 +7,7 @@ phases:
     commands:
       - echo "Lancement de la phase d'installation"
       - yum update -y
+      - yum remove -y php8.3*
       - yum install -y php-pgsql
       - yum install -y php-bcmath
       - yum install -y php-ctype
