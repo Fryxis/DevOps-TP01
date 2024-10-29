@@ -46,7 +46,7 @@ class LandingPageSetting extends Model
             "home_status" => 'on',
             "home_offer_text" => '70% Special Offer',
             "home_title" => 'Home',
-            "home_heading" => 'Salesy SaaS Business Sales CRM',
+            "home_heading" => 'LennySalesy SaaS Business Sales CRM',
             "home_description" => 'Use these awesome forms to login or create new account in your project for free.',
             "home_trusted_by" => '1000+ Customer',
             "home_live_demo_link" => 'https://demo.workdo.io/salesy-saas/login',
