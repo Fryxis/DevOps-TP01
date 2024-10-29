@@ -12,7 +12,7 @@ phases:
       - yum install -y php-ctype
       - yum install -y php-fileinfo
       - yum install -y php-mbstring
-      - yum install -y php-mysql
+      - yum install -y php8.2-mysqlnd 
       - yum install -y php-tokenizer
       - yum install -y php-xml
       - yum install -y php-json
