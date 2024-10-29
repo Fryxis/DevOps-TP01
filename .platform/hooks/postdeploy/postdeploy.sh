@@ -15,16 +15,16 @@ chmod -R 777 /var/current/ressources/lang
 chmod -R 777 /var/current/bootstrap/cache
 chown -R root:root /var/current/storage
 
-mkdir -p /var/www/storage/framework/sessions
-mkdir -p /var/www/storage/framework/views
-mkdir -p /var/www/storage/framework/cache
-mkdir -p /var/www/storage/logs
-chmod -R 777 /var/www/storage 
-chmod -R 777 /var/www/storage/framework
-chmod -R 777 /var/www/storage/framework/sessions
-chmod -R 777 /var/www/storage/framework/views
-chmod -R 777 /var/www/storage/framework/cache
-chmod -R 777 /var/www/storage/logs
-chmod -R 777 /var/www/ressources/lang
-chmod -R 777 /var/www/bootstrap/cache
-chown -R root:root /var/www/storage
+mkdir -p /var/www/html/storage/framework/sessions
+mkdir -p /var/www/html/storage/framework/views
+mkdir -p /var/www/html/storage/framework/cache
+mkdir -p /var/www/html/storage/logs
+chmod -R 777 /var/www/html/storage 
+chmod -R 777 /var/www/html/storage/framework
+chmod -R 777 /var/www/html/storage/framework/sessions
+chmod -R 777 /var/www/html/storage/framework/views
+chmod -R 777 /var/www/html/storage/framework/cache
+chmod -R 777 /var/www/html/storage/logs
+chmod -R 777 /var/www/html/ressources/lang/
+chmod -R 777 /var/www/html/bootstrap/cache/
+chown -R root:root /var/www/html/storage
