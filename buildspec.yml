@@ -41,17 +41,17 @@ phases:
       - sed -i "s/\${DB_USERNAME}/$DB_USERNAME/g" .env
       - sed -i "s/\${DB_PASSWORD}/$DB_PASSWORD/g" .env
       # Partie Nginx pas noté mais une solution.
-      - echo "Configuration Nginx"
+      #- echo "Configuration Nginx"
       #- mkdir /etc/nginx/sites-available/
       #- mkdir /etc/nginx/sites-enabled/
       #- mkdir /etc/nginx/snippets/
-      - cp -f /www/html/nginx/nginx.conf /etc/nginx/nginx.conf
+      #- cp -f /www/html/nginx/nginx.conf /etc/nginx/nginx.conf
       #- cp /www/html/nginx/crm /etc/nginx/sites-available/crm
       #- cp /www/html/nginx/fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
       #- rm -rf /www/html/nginx/
       #- ln -s /etc/nginx/sites-available/crm /etc/nginx/sites-enabled/
-      - echo "Redémarrage Nginx"
-      - systemctl restart nginx
+      #- echo "Redémarrage Nginx"
+      #- systemctl restart nginx
   build:
     on-failure: ABORT
     commands:
