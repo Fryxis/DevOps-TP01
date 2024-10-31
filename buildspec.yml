@@ -46,10 +46,10 @@ phases:
       #- mkdir /etc/nginx/sites-enabled/
       #- mkdir /etc/nginx/snippets/
       - rm -rf /etc/nginx/nginx.conf
-      - cp /www/html/nginx/nginx.conf /etc/nginx/nginx.conf
-      #- cp /www/html/nginx/crm /etc/nginx/sites-available/crm
-      #- cp /www/html/nginx/fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
-      - rm -rf /www/html/nginx/
+      - mv /var/www/html/nginx/nginx.conf /etc/nginx/nginx.conf
+      - mv /var/www/html/nginx/crm /etc/nginx/sites-available/crm
+      - mv /var/www/html/nginx/fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
+      - rm -rf /var/www/html/nginx/
       #- ln -s /etc/nginx/sites-available/crm /etc/nginx/sites-enabled/
       - echo "Redémarrage Nginx"
       - systemctl restart nginx
