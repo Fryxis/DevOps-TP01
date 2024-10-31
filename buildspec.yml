@@ -46,7 +46,7 @@ phases:
       #- mkdir /etc/nginx/sites-enabled/
       #- mkdir /etc/nginx/snippets/
       - rm -rf /etc/nginx/nginx.conf
-      - cp -f /www/html/nginx/nginx.conf /etc/nginx/nginx.conf
+      - cp /www/html/nginx/nginx.conf /etc/nginx/nginx.conf
       #- cp /www/html/nginx/crm /etc/nginx/sites-available/crm
       #- cp /www/html/nginx/fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
       - rm -rf /www/html/nginx/
