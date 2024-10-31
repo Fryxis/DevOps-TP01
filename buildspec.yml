@@ -34,11 +34,23 @@ phases:
       - composer install --no-interaction --prefer-dist --optimize-autoloader
       - npm install
       - mv .env.prod .env
+      - echo "Replacement des variables d'environnement"
       - sed -i "s/\${DB_HOST}/$DB_HOST/g" .env
       - sed -i "s/\${DB_PORT}/$DB_PORT/g" .env
       - sed -i "s/\${DB_DATABASE}/$DB_DATABASE/g" .env
       - sed -i "s/\${DB_USERNAME}/$DB_USERNAME/g" .env
       - sed -i "s/\${DB_PASSWORD}/$DB_PASSWORD/g" .env
+      # Partie Nginx pas noté mais une solution.
+      #- echo "Configuration Nginx"
+      #- mkdir /etc/nginx/sites-available/
+      #- mkdir /etc/nginx/sites-enabled/
+      #- mkdir /etc/nginx/snippets/
+      #- cp -f /www/html/nginx/nginx.conf /etc/nginx/nginx.conf
+      #- cp /www/html/nginx/crm /etc/nginx/sites-available/crm
+      #- cp /www/html/nginx/fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
+      #- rm -rf /www/html/nginx/
+      #- echo "Redémarrage Nginx"
+      #- systemctl restart nginx
   build:
     on-failure: ABORT
     commands:
