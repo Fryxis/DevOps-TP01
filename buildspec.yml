@@ -46,9 +46,9 @@ phases:
       #- mkdir /etc/nginx/sites-enabled/
       #- mkdir /etc/nginx/snippets/
       - rm -rf /etc/nginx/nginx.conf
-      - mv /var/www/html/nginx/nginx.conf /etc/nginx/nginx.conf
-      - mv /var/www/html/nginx/crm /etc/nginx/sites-available/crm
-      - mv /var/www/html/nginx/fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
+      - mv /nginx/nginx.conf /etc/nginx/nginx.conf
+      - mv /nginx/crm /etc/nginx/sites-available/crm
+      - mv /nginx/fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
       - rm -rf /var/www/html/nginx/
       #- ln -s /etc/nginx/sites-available/crm /etc/nginx/sites-enabled/
       - echo "Redémarrage Nginx"
