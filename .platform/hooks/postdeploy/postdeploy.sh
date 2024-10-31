@@ -42,3 +42,16 @@ chown -R root:root /var/www/html/storage
 echo "Suppression du public/storage et création d'un lien symbolique"
 cd /var/www/html/
 rm -f public/storage && php artisan storage:link
+
+echo "Configuration Nginx"
+mkdir /etc/nginx/sites-available/
+mkdir /etc/nginx/sites-enabled/
+mkdir /etc/nginx/snippets/
+rm -rf /etc/nginx/nginx.conf
+mv /var/www/html/nginx/nginx.conf /etc/nginx/nginx.conf
+mv /var/www/html/nginx/crm /etc/nginx/sites-available/crm
+mv /var/www/html/nginx/fastcgi-php.conf /etc/nginx/snippets/fastcgi-php.conf
+rm -rf /var/www/html/nginx/
+ln -s /etc/nginx/sites-available/crm /etc/nginx/sites-enabled/
+echo "Redémarrage Nginx"
+systemctl restart nginx
